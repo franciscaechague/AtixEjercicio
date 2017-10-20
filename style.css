@@ -1,0 +1,38 @@
+body {
+  background-image: url("fondo.png");
+  font-family: 'roboto', sans-serif;
+}
+
+form, .data {
+  font-size: 2em;
+  font-weight: 100;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-content: center;
+  align-items: center;
+  width: 20%;
+}
+
+form {
+  padding: 2em;
+}
+
+input {
+  color: #a6a7a5;
+  font-size: 0.5em;
+  font-weight: 400;
+
+}
+
+#country {
+  font-size: 2.5em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+#time {
+  font-size: 3em;
+  font-weight: 100;
+}

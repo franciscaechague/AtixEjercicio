@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Atix Ej</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Roboto:100|Roboto:200|Roboto:300|Roboto:500|Roboto:600|Roboto:700|Roboto:800|Saira+Extra+Condensed">
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="data">
+      <div id="country"> Country</div>
+      <div id="time">00:00:00</div>
+    </div>
+
+    <form id="lat-lon-form">
+      <label for="lat-input">Latitud</label>
+      <input type="text" id="latitud"><br>
+      <label for="lng-input">Longitud</label>
+      <input type="text" id="longitud"><br>
+
+      <input id="add-values" type="submit" value="Submit">
+    </form>
+
+  </div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="moment.js"></script>
+  <script src="moment-timezone-with-data.js"></script>
+  <script type="text/javascript">
+
+      let lat = "";
+      let lng = "";
+
+      $("#add-values").on("click", (event) => {
+        event.preventDefault();
+        lat = $("#latitud").val().trim();
+        lng = $("#longitud").val().trim();
+        console.log("latitud=" + lat);
+        console.log("longitud=" + lng);
+        displayInfo();
+      });
+
+
+
+      function displayInfo() {
+        let queryURL = "http://api.geonames.org/timezoneJSON?lat="+ lat +"&lng="+ lng +"&username=franciscaechague"
+        $.ajax({
+          url: queryURL,
+          method: "GET"
+        }).done((response) => {
+          console.log(response);
+          $("#country").html(response.countryName);
+          function update(){
+            let clock = moment().tz(response.timezoneId).format('H:mm:ss');
+            $("#time").html(clock);
+          }
+          setInterval(update, 1000);
+
+        });
+      }
+
+  </script>
+</body>
+
+</html>
